@@ -48,18 +48,18 @@ neighbours(east, north, west).
 allowed(Color) :-
 
 % Check right turns
-	(carPosition(Color, _, right);
+	carPosition(Color, _, right),!;
 
 % Check left turns
 	(carPosition(Color, Position, left),
 	neighbours(Position, RightNeighbour, StraightNeighbour),
 	aggregate_all(count, carPosition(_, StraightNeighbour, _), CountStraight),
-	aggregate_all(count, carPosition(_, RightNeighbour, _), CountRight),
-	(CountStraight + CountRight) < 1 );
+	aggregate_all(count, carPosition(_, RightNeighbour, _), CountRight1),
+	(CountStraight + CountRight1) < 1 ),!;
 
 % Check straight turns
 	(carPosition(Color, Position, straight),
 	neighbours(Position, RightNeighbour, _),
-	aggregate_all(count, carPosition(_, RightNeighbour, _), CountRight),
-	CountRight < 1 )).
+	aggregate_all(count, carPosition(_, RightNeighbour, _), CountRight2),
+	CountRight2 < 1 ),!.
 	
