@@ -2,6 +2,7 @@
 ## Description
 Defines the right of way logic on a crossroads using prolog.
 The allow function checks based on a predefined case if a car is allowed to drive.
+
 ![Crossroads Schema](./schematics/crossroads_case_A.png "Database Schema for case A")
 
 ## Testing Information
