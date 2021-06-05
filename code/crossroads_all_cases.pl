@@ -61,5 +61,5 @@ allowed(Color) :-
 	(carPosition(Color, Position, straight),
 	neighbours(Position, RightNeighbour, _),
 	aggregate_all(count, carPosition(_, RightNeighbour, _), CountRight),
-	(CountRight < 1 )).
+	CountRight < 1 )).
 	
