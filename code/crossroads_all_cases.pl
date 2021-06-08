@@ -1,8 +1,8 @@
 % crossroads logic
 % defines the right of way logic on a crossroads using prolog
-% 	first defines cars with color, positions, and directions
-%	second defines neighbours of positions
-%	third checks if is allowed to drive
+% 	- first defines cars with color, positions, and directions
+%	- second defines neighbours of positions
+%	- third checks if is allowed to drive
 
 
 
@@ -51,15 +51,14 @@ allowed(Color) :-
 	carPosition(Color, _, right),!;
 
 % Check left turns
-	(carPosition(Color, Position, left),
+	carPosition(Color, Position, left),
 	neighbours(Position, RightNeighbour, StraightNeighbour),
 	aggregate_all(count, carPosition(_, StraightNeighbour, _), CountStraight),
-	aggregate_all(count, carPosition(_, RightNeighbour, _), CountRight1),
-	(CountStraight + CountRight1) < 1 ),!;
+	aggregate_all(count, carPosition(_, RightNeighbour, _), CountRight),
+	(CountStraight + CountRight) < 1,!;
 
 % Check straight turns
-	(carPosition(Color, Position, straight),
+	carPosition(Color, Position, straight),
 	neighbours(Position, RightNeighbour, _),
-	aggregate_all(count, carPosition(_, RightNeighbour, _), CountRight2),
-	CountRight2 < 1 ),!.
-	
+	aggregate_all(count, carPosition(_, RightNeighbour, _), CountRight),
+	CountRight < 1.
